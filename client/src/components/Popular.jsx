@@ -19,7 +19,7 @@ const Popular = () => {
     
     const content ={
       type:'recipe',
-      order:'-fields.avarageOfRatings',
+      order:'-fields.averageOfRatings',
       limit:10
      }
     const myrcp =  await handleRecipe(content,"list")
@@ -30,8 +30,8 @@ const Popular = () => {
   
 
   return (
-  <div>
-        <Wrapper>
+  <div className="md:flex">
+        <Wrapper className="md:shrink-0 md:flex-col">
           <h3>Popular Picks</h3>
         <Splide
           options={{
@@ -42,7 +42,7 @@ const Popular = () => {
             gap: "5rem",
           }}>
             {popular.map((recipe) => {
-              const mystar = {size: 30, value: recipe.fields.avarageOfRatings, edit: false }
+              const mystar = {size: 30, value: recipe.fields.averageOfRatings, edit: false }
               return (
                 <SplideSlide key={recipe.sys.id}>
                   <Cards recipe={recipe} />

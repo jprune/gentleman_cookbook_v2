@@ -4,7 +4,7 @@ import Login from '../components/Login';
 import { GiKnifeFork } from 'react-icons/gi';
 
 const LoginPage = () => (
-  <div className="min-h-full h-screen flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+  <div className="min-h-full flex flex-col items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
     <div className="max-w-md w-full space-y-8">
       <div className="mb-10">
         <div className="flex justify-center">

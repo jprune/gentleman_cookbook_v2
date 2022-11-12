@@ -31,7 +31,7 @@ const Veggie = () => {
     }
     
  return (
-    <div>
+    <div className="md:flex">
       <Wrapper>
         <h3>Our Vegetarian Picks</h3>
         <Splide
