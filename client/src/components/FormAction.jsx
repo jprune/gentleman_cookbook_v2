@@ -5,7 +5,8 @@ const FormAction = ({
   handleSubmit,
   type = 'Button',
   text,
-}) => (
+}) => {
+  return (
   <>
     {
       type === 'Button'
@@ -21,6 +22,6 @@ const FormAction = ({
         : <></>
     }
   </>
-);
+)};
 
 export default FormAction;

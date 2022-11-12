@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import { useContext, useState } from 'react';
 import { loginFields } from '../constants/formFields';
 import Input from './Input';
-import FormExtra from './FormExtra';
+import axios from "axios";
 import FormAction from './FormAction';
+import { AppContext } from './Context';
+import { useNavigate } from 'react-router-dom';
 
 const fields = loginFields;
 const fieldsState = {};
@@ -10,22 +12,34 @@ const fieldsState = {};
 fields.forEach((field) => fieldsState[field.id] = '');
 
 const Login = () => {
+
   const [loginState, setLoginState] = useState(fieldsState);
+  const { dispatch } = useContext(AppContext);
+  const navigate = useNavigate();
+
   const handleChange = (e) => {
     setLoginState({ ...loginState, [e.target.id]: e.target.value });
+    console.log(loginState)
   };
 
   // Handle Login API Integration here
-  const authenticateUser = () => {
-
-  };
+  const authenticateUser = async () => {
+    const response = await axios.post("/user/login", loginState)
+    if (response.data.success) {
+      dispatch({
+          type: 'login',
+          payload: response.data.user.username
+      })
+    navigate("/")
+  }};
   const handleSubmit = (e) => {
     e.preventDefault();
-    authenticateUser();
+    console.log()
+    authenticateUser()
   };
 
   return (
-    <form className="mt-8 space-y-6 max-w-md w-full">
+    <form className="mt-8 space-y-6 max-w-md w-full" onSubmit={handleSubmit}>
       <div className="-space-y-px">
         {
           fields.map((field) => (
@@ -43,12 +57,9 @@ const Login = () => {
             />
           ))
         }
+        <FormAction handleSubmit={handleSubmit} text="Login" />
       </div>
-
-      <FormExtra />
-      <FormAction handleSubmit={handleSubmit} text="Login" />
     </form>
   );
-};
-
-export default Login;
+}
+export default Login
