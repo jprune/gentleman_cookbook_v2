@@ -5,7 +5,7 @@ module.exports.register = async (req, res) => {
         const userCreated = await User.create(req.body)         
         console.log("🚀 ~ file: userController.js ~ line 6 ~ module.exports.register= ~ userCreated", userCreated)
         
-        res.send({success: true})
+        res.send({ success: true })
     } catch (error) {
         console.log("error creating user:", error.message)
         res.send({

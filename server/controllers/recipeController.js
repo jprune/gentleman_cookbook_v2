@@ -22,7 +22,7 @@ module.exports.list = async (req, res) => {
 
         res.send({
             success: true, 
-            users: data,
+            recipes: allRecipes,
         })
     } catch (error) {
         console.log("error listing recipe", error.message)
@@ -35,12 +35,13 @@ module.exports.list = async (req, res) => {
 
 module.exports.find = async (req, res) => {
     try {
-        const specificRecipe = await Recipe.find(req.query)       
+        console.log(req.query)
+        const specificRecipe = await Recipe.find({id: req.query.id})       
         console.log("🚀 ~ file: recipeController.js ~ line 39 ~ module.exports.find= ~ specificRecipe", specificRecipe)
 
         res.send({
             success: true, 
-            users: data,
+            users: specificRecipe,
         })
     } catch (error) {
         console.log("error finding recipe:", error.message)
