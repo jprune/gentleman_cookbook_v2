@@ -29,10 +29,14 @@ a {
   color: rgb(56, 56, 56);
 }
 
+a:hover {
+  transform: scale(1.1);
+}
+
 p {
   color: black;
 }
 
 #footer-logo {
-  font-family: 'Lobster Two', 'Montserrat';
+  font-family: 'Lobster Two','Montserrat';
 }

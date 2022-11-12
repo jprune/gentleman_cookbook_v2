@@ -24,7 +24,7 @@ function Search() {
                   autoFocus={true}
               />
             </div>
-    </FormStyle>
+      </FormStyle>
   )
 }
 

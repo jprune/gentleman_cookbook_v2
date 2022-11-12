@@ -28,7 +28,9 @@ function NavBar() {
             </div>
       </Nav>
         <Search />
-        <Category />
+      <div className='md:flex-col'>
+            <Category />
+      </div>
     </>
   )
 }
@@ -36,16 +38,16 @@ function NavBar() {
 const Logo = styled(Link)`
 text-decoration: none;
 font-size: 2rem;
-font-weight: 400;
-font-family: 'Lobster Two', cursive;
+font-weight: 500;
+font-family: 'Lobster Two','Montserrat';
  &:hover {
         color: #C1121F;
-        font-weight: 500;
+        /* font-weight: 500; */
  }
 `
 
 const Nav = styled.div`
-padding: 4rem 0rem;
+padding: 1rem 0rem;
 display: flex;
 justify-content: space-between;
 align-items: center;
