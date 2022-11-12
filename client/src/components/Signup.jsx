@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { signupFields } from '../constants/formFields';
 import FormAction from './FormAction';
 import Input from './Input';
-import { createUser } from '../utils/userFunc';
+import axios from "axios";
 import { useNavigate } from 'react-router-dom';
+import { AppContext } from './Context';
 
 const fields = signupFields;
 const fieldsState = {};
@@ -12,20 +13,33 @@ fields.forEach((field) => fieldsState[field.id] = '');
 
 const Signup = () => {
   const [signupState, setSignupState] = useState(fieldsState);
+  const { dispatch } = useContext(AppContext)
   const navigate = useNavigate();
   console.log('signup State', signupState);
 
   const handleChange = (e) => setSignupState({ ...signupState, [e.target.id]: e.target.value });
 
   // handle Signup API Integration here
-  const createAccount = async () => {
-    await createUser(signupState.username, signupState.password, signupState.email, signupState.userID);
+  const createAccount = async (userObj) => {
+    const response = await axios.post("/user/register", userObj)
+    if (response.data.success) {
+      dispatch({
+          type: 'login',
+          payload: userObj.username
+      })
     navigate("/")
+  }
   };
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(signupState);
-    createAccount();
+    if (signupState.password === signupState.confirmPassword) {
+      const userObj = {
+        email: signupState.email,
+        username: signupState.username,
+        password: signupState.password
+      }
+      createAccount(userObj)
+    } else alert("Password and Confirm must match")
   };
 
   return (

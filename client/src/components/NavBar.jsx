@@ -1,12 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { Link } from 'react-router-dom';
 import { GiKnifeFork } from 'react-icons/gi';
 import styled from "styled-components";
 import Category from "./Category";
 import Search from "./Search";
+import { AppContext } from './Context';
 
 
 function NavBar() {
+  const { state } = useContext(AppContext)
+
   return (
     <>
     <Nav className=''>
@@ -15,8 +18,13 @@ function NavBar() {
             <Logo to={"/"}>The Gentlemen's Cookbook</Logo>
             </div>
             <div className='flex flex-row'>
-              <Link to={"/login"} style={{textDecoration: 'none'}}><Button>Log in</Button></Link>
-              <Link to={"/profile"} style={{textDecoration: 'none'}}><Button>Profile</Button></Link>
+            {
+              state.user 
+              ? <Link to={"/profile"} style={{textDecoration: 'none'}}><Button className='font-bold'>{state.user}</Button></Link>
+              : <Link to={"/login"} style={{textDecoration: 'none'}}><Button>Log in</Button></Link>
+            }
+              
+              
             </div>
       </Nav>
         <Search />
