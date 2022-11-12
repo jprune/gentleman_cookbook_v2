@@ -32,3 +32,32 @@ module.exports.list = async (req, res) => {
         })
     }
 }
+
+module.exports.login = async (req, res) => {
+
+    try {
+        console.log("🚀 ~ login here: ")
+
+        const {emailOrUsername, password} = req.body
+
+        if (!emailOrUsername || !password) {
+            res.send({success: false, error: "not fitting credentials"})
+            return
+        }
+
+        const userFound = await User.find({
+            $or: [{username: emailOrUsername}, {email: emailOrUsername}],
+            password: password
+        }).select('-__v -password')
+        console.log("🚀 ~ userFound", userFound)
+
+        if (!userFound.length) {
+            res.send({success: false, error: "no user found. Sign Up"})
+            return
+        }
+        res.send({success: true, user: userFound[0]})
+    } catch (error) {
+        console.log("🚀 ~ Error in Login users", error.message)
+        res.send({success: false, error: error.message})
+    }
+}

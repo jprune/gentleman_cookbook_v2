@@ -23,8 +23,6 @@ function NavBar() {
               ? <Link to={"/profile"} style={{textDecoration: 'none'}}><Button className='font-bold'>{state.user}</Button></Link>
               : <Link to={"/login"} style={{textDecoration: 'none'}}><Button>Log in</Button></Link>
             }
-              
-              
             </div>
       </Nav>
         <Search />
