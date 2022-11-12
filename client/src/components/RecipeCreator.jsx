@@ -3,7 +3,6 @@ import { recipeFields } from '../constants/formFields';
 import FormAction from './FormAction';
 import Input from './Input';
 import { useNavigate } from 'react-router-dom';
-import { createRecipe } from '../utils/createRecipeFunc';
 
 const fields = recipeFields;
 const fieldsState = {};
@@ -31,8 +30,7 @@ const RecipeCreator = () => {
     
   // handle Signup API Integration here
   const createRecipeTotal = async () => {
-    await createRecipe(recipeState.title, recipeState.ingredients, recipeState.recipeInstructions, recipeState.numberOfRatings, recipeState.averageOfRatings, recipeState.userId);
-    navigate("/")
+    
   };
   const handleSubmit = (e) => {
     e.preventDefault();

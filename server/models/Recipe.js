@@ -35,7 +35,7 @@ const recipeSchema = new Schema({
         required: true,
     },
     picture: {
-        type: Image,
+        type: String,
         required: true,
     },
     ingredients: {
@@ -48,8 +48,9 @@ const recipeSchema = new Schema({
     comments: {
         type: [commentsSchema],
     },
-    createdAt: {
-        type: Date.now,
+    createdAt: { 
+        type: Date, 
+        default: Date.now
     },
     numberOfRatings: {
         type: Number,
